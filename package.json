@@ -4,13 +4,20 @@
   "description": "CS 348 group project server",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r dotenv/config .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon -x npm start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^3.0.0",
-    "koa": "^2.7.0"
+    "dotenv": "^8.0.0",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
+    "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
