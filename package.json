@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node -r dotenv/config .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon -x npm start"
+    "watch": "nodemon -x npm start",
+    "migrate-up": "node -r dotenv/config migrations/up",
+    "migrate-down": "node -r dotenv/config migrations/down"
   },
   "author": "",
   "license": "ISC",
