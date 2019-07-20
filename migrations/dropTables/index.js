@@ -1,7 +1,6 @@
 const Host = 'DROP TABLE IF EXISTS Host;'
 const Event = 'DROP TABLE IF EXISTS Event;'
 const Venue = 'DROP TABLE IF EXISTS Venue;'
-const HeldAt = 'DROP TABLE IF EXISTS HeldAt;'
 const Supplier = 'DROP TABLE IF EXISTS Supplier;'
 const Product = 'DROP TABLE IF EXISTS Product;'
 const Order = 'DROP TABLE IF EXISTS Orders;'
@@ -11,7 +10,8 @@ const FoodItem = 'DROP TABLE IF EXISTS FoodItem;'
 const DecorItem = 'DROP TABLE IF EXISTS DecorItem;'
 const Entertainment = 'DROP TABLE IF EXISTS Entertainment;'
 const DietaryRestriction = 'DROP TABLE IF EXISTS DietaryRestriction;'
-const DietaryRestrictionAppliesTo = 'DROP TABLE IF EXISTS DietaryRestrictionAppliesTo;'
+const DietaryRestrictionAppliesTo =
+  'DROP TABLE IF EXISTS DietaryRestrictionAppliesTo;'
 
 module.exports = [
   Order,
@@ -24,7 +24,6 @@ module.exports = [
   Discount,
   Product,
   Supplier,
-  HeldAt,
   Event,
   Venue,
   Host,
