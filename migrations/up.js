@@ -1,40 +1,17 @@
 const client = require('../src/db/client')
-const {
-  Host,
-  Event,
-  Venue,
-  HeldAt,
-  Supplier,
-  Product,
-  Order,
-  Discount,
-  ParadeFloat,
-  FoodItem,
-  DecorItem,
-  Entertainment,
-  DietaryRestriction,
-  DietaryRestrictionAppliesTo,
-} = require('./createTables')
+const createTables = require('./createTables')
+const populateTables = require('./populateTables')
 
-const query = [
-  Host,
-  Event,
-  Venue,
-  HeldAt,
-  Supplier,
-  Product,
-  Order,
-  Discount,
-  ParadeFloat,
-  FoodItem,
-  DecorItem,
-  Entertainment,
-  DietaryRestriction,
-  DietaryRestrictionAppliesTo,
-].join('\n')
+console.log(createTables)
+console.log(populateTables)
 
-console.log(query)
+const up = async () => {
+  try {
+    console.log(await client.query(createTables))
+    console.log(await client.query(populateTables))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-client.query(query)
-  .then(console.log)
-  .catch(console.error)
+up()

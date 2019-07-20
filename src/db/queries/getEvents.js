@@ -1,12 +1,8 @@
 module.exports = () => `
 SELECT
-  Event.EventId,
-  Event.EventName,
-  Event.HostId,
-  Host.FirstName as HostName,
-  Host.Email as HostEmail,
-  Host.PhoneNumber as HostPhoneNumber
+  EventId,
+  EventName,
+  HostId
 FROM Event
-LEFT JOIN Host
-ON Event.HostId = Host.HostId;
-`
+ORDER BY EventId
+;`
