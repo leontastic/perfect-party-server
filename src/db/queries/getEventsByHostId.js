@@ -1,4 +1,4 @@
-module.exports = (hostId) => `
+module.exports = hostId => `
 SELECT
   EventId,
   EventName,

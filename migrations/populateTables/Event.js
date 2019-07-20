@@ -1,0 +1,32 @@
+module.exports = `
+INSERT INTO Event (HostId, EventName)
+VALUES
+  (1, 'Cambridge Farmers'' Market'),
+  (1, 'Save a Life & Splash into Summer'),
+  (2, 'Downtown Kitchener Ribfest'),
+  (3, 'Kitchener Waterloo''s Got Magic'),
+  (3, 'Craft Beer Show 2019'),
+  (3, 'Show and Shine Classic Car Mondays'),
+  (5, 'Euchre Meetup'),
+  (5, 'Fiddle Orchestra'),
+  (5, 'Homer Watson House Art Exhibition'),
+  (5, 'Horticultural Society Garden Meetup'),
+  (5, 'Musical Murder Mystery Dinner'),
+  (5, 'Teen Nerf Nite'),
+  (5, 'Saturday Night Dance'),
+  (5, 'Teen Writing Cafe'),
+  (6, 'Friday Night Karaoke Dance'),
+  (6, 'OKTOBERFEST 2019'),
+  (6, 'Soap Opera in the Square'),
+  (6, 'Trucking Tuesdays'),
+  (7, 'Little KW Flamenco Fest'),
+  (7, 'Summer Brewfest BBQ'),
+  (7, 'Sunday Night Concert Series'),
+  (7, 'The Backlot Sessions 2019'),
+  (8, 'Global Leadership Summit'),
+  (8, 'Grease'),
+  (8, 'Sunset Sessions in Goudies Lane'),
+  (9, 'Castle Concert Series'),
+  (9, 'Clay and Glass Gallery Art Exhibition'),
+  (9, 'Paris Drinks Party')
+;`

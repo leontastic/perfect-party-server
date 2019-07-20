@@ -1,4 +1,4 @@
-const Host = `CREATE TABLE Host (
+const Host = `CREATE TABLE IF NOT EXISTS Host (
   HostId SERIAL PRIMARY KEY NOT NULL,
   FirstName VARCHAR(255),
   LastName VARCHAR(255),
@@ -6,21 +6,21 @@ const Host = `CREATE TABLE Host (
   Email VARCHAR(255)
 );`
 
-const Event = `CREATE TABLE Event (
+const Event = `CREATE TABLE IF NOT EXISTS Event (
   EventId SERIAL PRIMARY KEY NOT NULL,
   HostId INT,
   EventName VARCHAR(255),
   FOREIGN KEY (HostId) REFERENCES Host
 );`
 
-const Venue = `CREATE TABLE Venue (
+const Venue = `CREATE TABLE IF NOT EXISTS Venue (
   VenueId SERIAL PRIMARY KEY NOT NULL,
   Name VARCHAR(255),
   Address VARCHAR(255),
   Price DECIMAL(9,2)
 );`
 
-const HeldAt = `CREATE TABLE HeldAt (
+const HeldAt = `CREATE TABLE IF NOT EXISTS HeldAt (
   VenueId INT,
   EventId INT,
   StartDate DATE,
@@ -31,14 +31,14 @@ const HeldAt = `CREATE TABLE HeldAt (
   FOREIGN KEY (EventId) REFERENCES Event
 );`
 
-const Supplier = `CREATE TABLE Supplier (
+const Supplier = `CREATE TABLE IF NOT EXISTS Supplier (
   SupplierId SERIAL PRIMARY KEY NOT NULL,
   Name VARCHAR(255),
   Email VARCHAR(255),
   Address VARCHAR(255)
 );`
 
-const Product = `CREATE TABLE Product (
+const Product = `CREATE TABLE IF NOT EXISTS Product (
   ProductId INT PRIMARY KEY,
   Name VARCHAR(255),
   Price DECIMAL(9,2),
@@ -47,7 +47,7 @@ const Product = `CREATE TABLE Product (
   FOREIGN KEY (SupplierId) REFERENCES Supplier
 );`
 
-const Order = `CREATE TABLE Orders (
+const Order = `CREATE TABLE IF NOT EXISTS Orders (
   OrderId SERIAL PRIMARY KEY NOT NULL,
   EventId INT,
   ProductId INT,
@@ -57,13 +57,13 @@ const Order = `CREATE TABLE Orders (
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const Discount = `CREATE TABLE Discount (
+const Discount = `CREATE TABLE IF NOT EXISTS Discount (
   ProductId SERIAL PRIMARY KEY NOT NULL,
   DiscountValue DECIMAL(4,4),
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const ParadeFloat = `CREATE TABLE ParadeFloat (
+const ParadeFloat = `CREATE TABLE IF NOT EXISTS ParadeFloat (
   ProductId INT,
   Height INT,
   Width INT,
@@ -73,30 +73,30 @@ const ParadeFloat = `CREATE TABLE ParadeFloat (
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const FoodItem = `CREATE TABLE FoodItem (
+const FoodItem = `CREATE TABLE IF NOT EXISTS FoodItem (
   ProductId INT PRIMARY KEY,
   Cuisine VARCHAR(255),
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const DecorItem = `CREATE TABLE DecorItem (
+const DecorItem = `CREATE TABLE IF NOT EXISTS DecorItem (
   ProductId INT PRIMARY KEY,
   Color VARCHAR(255),
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const Entertainment = `CREATE TABLE Entertainment (
+const Entertainment = `CREATE TABLE IF NOT EXISTS Entertainment (
   ProductId INT PRIMARY KEY,
   AgeRestriction INT,
   FOREIGN KEY (ProductId) REFERENCES Product
 );`
 
-const DietaryRestriction = `CREATE TABLE DietaryRestriction (
+const DietaryRestriction = `CREATE TABLE IF NOT EXISTS DietaryRestriction (
   RestrictionId SERIAL PRIMARY KEY NOT NULL,
   Description VARCHAR(255)
 );`
 
-const DietaryRestrictionAppliesTo = `CREATE TABLE DietaryRestrictionAppliesTo (
+const DietaryRestrictionAppliesTo = `CREATE TABLE IF NOT EXISTS DietaryRestrictionAppliesTo (
   ProductId INT,
   RestrictionId INT,
   PRIMARY KEY (ProductId, RestrictionId),

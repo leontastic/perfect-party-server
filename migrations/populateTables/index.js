@@ -1,5 +1,4 @@
 const Host = require('./Host')
+const Event = require('./Event')
 
-module.exports = [
-  Host
-].join('\n')
+module.exports = [Host, Event].join('\n')

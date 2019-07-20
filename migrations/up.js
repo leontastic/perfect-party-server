@@ -9,8 +9,10 @@ const up = async () => {
   try {
     console.log(await client.query(createTables))
     console.log(await client.query(populateTables))
+    process.exit(0)
   } catch (err) {
     console.error(err)
+    process.exit(1)
   }
 }
 
