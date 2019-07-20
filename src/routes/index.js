@@ -4,6 +4,7 @@ const getEvents = require('../db/queries/getEvents')
 const getHosts = require('../db/queries/getHosts')
 const getEventsByHostId = require('../db/queries/getEventsByHostId')
 const getVenues = require('../db/queries/getVenues')
+const getSuppliers = require('../db/queries/getSuppliers')
 
 const router = new Router()
 
@@ -27,6 +28,10 @@ router.get('/events', async ctx => {
 
 router.get('/venues', async ctx => {
   ;({ rows: ctx.body } = await db.query(getVenues()))
+})
+
+router.get('/suppliers', async ctx => {
+  ;({ rows: ctx.body } = await db.query(getSuppliers()))
 })
 
 module.exports = router.routes()
