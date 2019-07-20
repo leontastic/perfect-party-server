@@ -3,6 +3,7 @@ const db = require('../db/client')
 const getEvents = require('../db/queries/getEvents')
 const getHosts = require('../db/queries/getHosts')
 const getEventsByHostId = require('../db/queries/getEventsByHostId')
+const getVenues = require('../db/queries/getVenues')
 
 const router = new Router()
 
@@ -22,6 +23,10 @@ router.get('/hosts/:hostId/events', async ctx => {
 
 router.get('/events', async ctx => {
   ;({ rows: ctx.body } = await db.query(getEvents()))
+})
+
+router.get('/venues', async ctx => {
+  ;({ rows: ctx.body } = await db.query(getVenues()))
 })
 
 module.exports = router.routes()

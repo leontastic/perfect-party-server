@@ -19,7 +19,7 @@ const Event = `CREATE TABLE IF NOT EXISTS Event (
   EventDate DATE,
   HostId INT,
   VenueId INT,
-  VenuePrice INT,
+  VenuePrice DECIMAL(9,2),
   FOREIGN KEY (HostId) REFERENCES Host,
   FOREIGN KEY (VenueId) REFERENCES Venue
 );`
