@@ -6,20 +6,22 @@ const Host = `CREATE TABLE IF NOT EXISTS Host (
   Email VARCHAR(255)
 );`
 
-const Event = `CREATE TABLE IF NOT EXISTS Event (
-  EventId SERIAL PRIMARY KEY NOT NULL,
-  EventName VARCHAR(255),
-  EventDate DATE,
-  HostId INT,
-  VenuePrice INT,
-  FOREIGN KEY (HostId) REFERENCES Host
-);`
-
 const Venue = `CREATE TABLE IF NOT EXISTS Venue (
   VenueId SERIAL PRIMARY KEY NOT NULL,
   Name VARCHAR(255),
   Address VARCHAR(255),
   Price DECIMAL(9,2)
+);`
+
+const Event = `CREATE TABLE IF NOT EXISTS Event (
+  EventId SERIAL PRIMARY KEY NOT NULL,
+  EventName VARCHAR(255),
+  EventDate DATE,
+  HostId INT,
+  VenueId INT,
+  VenuePrice INT,
+  FOREIGN KEY (HostId) REFERENCES Host,
+  FOREIGN KEY (VenueId) REFERENCES Venue
 );`
 
 const Supplier = `CREATE TABLE IF NOT EXISTS Supplier (
@@ -97,8 +99,8 @@ const DietaryRestrictionAppliesTo = `CREATE TABLE IF NOT EXISTS DietaryRestricti
 
 module.exports = [
   Host,
-  Event,
   Venue,
+  Event,
   Supplier,
   Product,
   ParadeFloat,

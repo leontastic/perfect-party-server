@@ -3,7 +3,11 @@ SELECT
   EventId,
   EventName,
   EventDate,
-  HostId
+  HostId,
+  Venue.Name as VenueName,
+  VenuePrice
 FROM Event
-ORDER BY EventId
+INNER JOIN Venue
+ON Event.VenueId = Venue.VenueId
+ORDER BY EventDate
 ;`
