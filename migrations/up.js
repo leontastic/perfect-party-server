@@ -1,8 +1,7 @@
-const client = require('../db/client')
+const client = require('../src/db/client')
 const {
   Host,
   Event,
-  HostEvent,
   Venue,
   HeldAt,
   Supplier,
@@ -20,7 +19,6 @@ const {
 const query = [
   Host,
   Event,
-  HostEvent,
   Venue,
   HeldAt,
   Supplier,

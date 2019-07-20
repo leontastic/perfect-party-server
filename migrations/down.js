@@ -1,8 +1,7 @@
-const client = require('../db/client')
+const client = require('../src/db/client')
 const {
   Host,
   Event,
-  HostEvent,
   Venue,
   HeldAt,
   Supplier,
@@ -18,21 +17,20 @@ const {
 } = require('./deleteTables')
 
 const query = [
-  Host,
-  Event,
-  HostEvent,
-  Venue,
   HeldAt,
-  Supplier,
-  Product,
   Order,
   Discount,
+  DietaryRestrictionAppliesTo,
+  DietaryRestriction,
   ParadeFloat,
   FoodItem,
   DecorItem,
   Entertainment,
-  DietaryRestriction,
-  DietaryRestrictionAppliesTo,
+  Product,
+  Supplier,
+  Event,
+  Host,
+  Venue,
 ].join('\n')
 
 console.log(query)

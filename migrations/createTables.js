@@ -8,16 +8,10 @@ module.exports.Host =
 
 module.exports.Event =
   `CREATE TABLE Event (
-    EventId SERIAL PRIMARY KEY NOT NULL
-  );`
-
-module.exports.HostEvent =
-  `CREATE TABLE HostEvent (
+    EventId SERIAL PRIMARY KEY NOT NULL,
     HostId INT,
-    EventId INT,
-    PRIMARY KEY (HostId, EventId),
-    FOREIGN KEY (HostId) REFERENCES Host,
-    FOREIGN KEY (EventId) REFERENCES Event
+    EventName VARCHAR(255),
+    FOREIGN KEY (HostId) REFERENCES Host
   );`
 
 module.exports.Venue =

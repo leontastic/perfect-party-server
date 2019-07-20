@@ -1,6 +1,5 @@
 module.exports.Host = 'DROP TABLE IF EXISTS Host;'
 module.exports.Event = 'DROP TABLE IF EXISTS Event;'
-module.exports.HostEvent = 'DROP TABLE IF EXISTS HostEvent;'
 module.exports.Venue = 'DROP TABLE IF EXISTS Venue;'
 module.exports.HeldAt = 'DROP TABLE IF EXISTS HeldAt;'
 module.exports.Supplier = 'DROP TABLE IF EXISTS Supplier;'
