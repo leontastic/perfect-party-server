@@ -2,12 +2,14 @@ const Router = require('koa-router')
 const db = require('../db/client')
 const getEvents = require('../db/queries/getEvents')
 const getHostsWithEventCount = require('../db/queries/getHostsWithEventCount')
-const getEventsByHostId = require('../db/queries/getEventsByHostId')
 const getVenues = require('../db/queries/getVenues')
 const getSuppliers = require('../db/queries/getSuppliers')
 const insertEntity = require('../db/queries/insertEntity')
 const updateEntity = require('../db/queries/updateEntity')
 const deleteEntity = require('../db/queries/deleteEntity')
+const getFoodItems = require('../db/queries/getFoodItems')
+const getDecorItems = require('../db/queries/getDecorItems')
+const getEntertainment = require('../db/queries/getEntertainment')
 
 const router = new Router()
 
@@ -45,16 +47,10 @@ createBasicRoutes('suppliers', {
   delete: deleteEntity('Supplier', 'SupplierId'),
 })
 
-router.get('/hosts/:hostId/events', async ctx => {
-  ;({ rows: ctx.body } = await db.query(getEventsByHostId(ctx.params.hostId)))
-})
-
-router.get('/events', async ctx => {
-  ;({ rows: ctx.body } = await db.query(getEvents()))
-})
-
-router.get('/venues', async ctx => {
-  ;({ rows: ctx.body } = await db.query(getVenues()))
-})
+router.get('/events', async ctx => ({ rows: ctx.body } = await db.query(getEvents())))
+router.get('/venues', async ctx => ({ rows: ctx.body } = await db.query(getVenues())))
+router.get('/products/food', async ctx => ({ rows: ctx.body } = await db.query(getFoodItems())))
+router.get('/products/decor', async ctx => ({ rows: ctx.body } = await db.query(getDecorItems())))
+router.get('/products/entertainment', async ctx => ({ rows: ctx.body } = await db.query(getEntertainment())))
 
 module.exports = router.routes()
