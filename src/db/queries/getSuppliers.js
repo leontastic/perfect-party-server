@@ -6,4 +6,4 @@ SELECT
   Address
 FROM Supplier
 ORDER BY SupplierId
-;`
+`

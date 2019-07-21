@@ -11,4 +11,4 @@ LEFT JOIN Event
 ON Host.HostId = Event.HostId
 GROUP BY Host.HostId
 ORDER BY Host.HostId
-;`
+`

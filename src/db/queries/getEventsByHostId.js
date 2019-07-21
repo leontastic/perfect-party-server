@@ -6,4 +6,4 @@ SELECT
   HostId
 FROM Event
 WHERE HostId = ${hostId}
-;`
+`

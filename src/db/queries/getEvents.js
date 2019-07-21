@@ -13,4 +13,4 @@ ON Event.VenueId = Venue.VenueId
 LEFT JOIN Host
 ON Event.HostId = Host.HostId
 ORDER BY EventDate
-;`
+`

@@ -1,13 +1,13 @@
 const Router = require('koa-router')
 const db = require('../db/client')
 const getEvents = require('../db/queries/getEvents')
-const getHosts = require('../db/queries/getHosts')
+const getHostsWithEventCount = require('../db/queries/getHostsWithEventCount')
 const getEventsByHostId = require('../db/queries/getEventsByHostId')
 const getVenues = require('../db/queries/getVenues')
 const getSuppliers = require('../db/queries/getSuppliers')
-const insertHost = require('../db/queries/insertHost')
-const updateHost = require('../db/queries/updateHost')
-const deleteHost = require('../db/queries/deleteHost')
+const insertEntity = require('../db/queries/insertEntity')
+const updateEntity = require('../db/queries/updateEntity')
+const deleteEntity = require('../db/queries/deleteEntity')
 
 const router = new Router()
 
@@ -17,20 +17,32 @@ router.get('/current-time', async ctx => {
   } = await db.query('SELECT NOW()'))
 })
 
-router.get('/hosts', async ctx => {
-  ;({ rows: ctx.body } = await db.query(getHosts()))
+const createBasicRoutes = (
+  entity,
+  { create: createQuery, index: indexQuery, update: updateQuery, delete: deleteQuery },
+) => {
+  const handleIndex = async ctx => ({ rows: ctx.body } = await db.query(indexQuery()))
+  const handleCreate = async ctx => ({ rows: ctx.body } = await db.query(createQuery(ctx.request.body)))
+  const handleUpdate = async ctx => ({ rows: ctx.body } = await db.query(updateQuery(ctx.params.id, ctx.request.body)))
+  const handleDelete = async ctx => ({ rows: ctx.body } = await db.query(deleteQuery(ctx.params.id)))
+  router.get(`/${entity}`, handleIndex)
+  router.post(`/${entity}`, handleCreate)
+  router.put(`/${entity}/:id`, handleUpdate)
+  router.delete(`/${entity}/:id`, handleDelete)
+}
+
+createBasicRoutes('hosts', {
+  create: insertEntity('Host', 'HostId'),
+  index: getHostsWithEventCount,
+  update: updateEntity('Host', 'HostId'),
+  delete: deleteEntity('Host', 'HostId'),
 })
 
-router.post('/hosts', async ctx => {
-  ctx.body = await db.query(insertHost(ctx.request.body))
-})
-
-router.put('/hosts/:hostid', async ctx => {
-  ctx.body = await db.query(updateHost(ctx.params.hostid, ctx.request.body))
-})
-
-router.delete('/hosts/:hostid', async ctx => {
-  ctx.body = await db.query(deleteHost(ctx.params.hostid))
+createBasicRoutes('suppliers', {
+  create: insertEntity('Supplier', 'SupplierId'),
+  index: getSuppliers,
+  update: updateEntity('Supplier', 'SupplierId'),
+  delete: deleteEntity('Supplier', 'SupplierId'),
 })
 
 router.get('/hosts/:hostId/events', async ctx => {
@@ -43,10 +55,6 @@ router.get('/events', async ctx => {
 
 router.get('/venues', async ctx => {
   ;({ rows: ctx.body } = await db.query(getVenues()))
-})
-
-router.get('/suppliers', async ctx => {
-  ;({ rows: ctx.body } = await db.query(getSuppliers()))
 })
 
 module.exports = router.routes()
