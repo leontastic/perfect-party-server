@@ -1,11 +1,11 @@
 module.exports = () => `
 SELECT
-  EventId,
-  EventName,
-  EventDate,
+  Event.EventId,
+  Event.EventName,
+  Event.EventDate,
   Event.HostId,
+  Event.VenuePrice,
   Venue.Name as VenueName,
-  VenuePrice,
   CONCAT(Host.FirstName, ' ', Host.LastName) AS HostName
 FROM Event
 INNER JOIN Venue
