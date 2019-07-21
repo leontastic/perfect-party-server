@@ -9,5 +9,5 @@ FROM Venue
 LEFT JOIN Event
 ON Venue.VenueId = Event.VenueId
 GROUP BY Venue.VenueId
-ORDER BY Venue.Price DESC
+ORDER BY Venue.Name
 `

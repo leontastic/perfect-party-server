@@ -6,6 +6,7 @@ SELECT
   Event.HostId,
   Event.VenuePrice,
   Venue.Name as VenueName,
+  Venue.Address as VenueAddress,
   CONCAT(Host.FirstName, ' ', Host.LastName) AS HostName
 FROM Event
 INNER JOIN Venue

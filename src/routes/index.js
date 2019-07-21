@@ -70,6 +70,13 @@ createBasicRoutes('products', {
   delete: deleteEntity('Product', 'ProductId'),
 })
 
+createBasicRoutes('venues', {
+  create: insertEntity('Venue', 'VenueId'),
+  index: getVenues,
+  update: updateEntity('Venue', 'VenueId'),
+  delete: deleteEntity('Venue', 'VenueId'),
+})
+
 router.get('/events', async ctx => ({ rows: ctx.body } = await db.query(getEvents())))
 router.get('/venues', async ctx => ({ rows: ctx.body } = await db.query(getVenues())))
 router.get('/products', async ctx => {
