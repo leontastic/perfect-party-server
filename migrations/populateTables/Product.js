@@ -118,22 +118,31 @@ const entertainment = [
   ['U2', 'Irish rock band from Dublin, formed in 1976', 54172, 14, 18],
 ]
 
-const populateFoodItems = foodItems
-  .map(([name, description, price, supplierid, cuisine]) => ({ name, description, price, supplierid, cuisine }))
-  .map(insertProduct('FoodItem'))
+const populateFoodItems = foodItems.map(([name, description, price, supplierid, cuisine]) => ({
+  producttype: 'FoodItem',
+  name,
+  description,
+  price,
+  supplierid,
+  cuisine,
+}))
 
-const populateDecorItems = decorItems
-  .map(([name, description, price, supplierid, color]) => ({ name, description, price, supplierid, color }))
-  .map(insertProduct('DecorItem'))
+const populateDecorItems = decorItems.map(([name, description, price, supplierid, color]) => ({
+  producttype: 'DecorItem',
+  name,
+  description,
+  price,
+  supplierid,
+  color,
+}))
 
-const populateEntertainment = entertainment
-  .map(([name, description, price, supplierid, agerestriction]) => ({
-    name,
-    description,
-    price,
-    supplierid,
-    agerestriction,
-  }))
-  .map(insertProduct('Entertainment'))
+const populateEntertainment = entertainment.map(([name, description, price, supplierid, agerestriction]) => ({
+  producttype: 'Entertainment',
+  name,
+  description,
+  price,
+  supplierid,
+  agerestriction,
+}))
 
-module.exports = [...populateFoodItems, ...populateDecorItems, ...populateEntertainment].join('\n')
+module.exports = [...populateFoodItems, ...populateDecorItems, ...populateEntertainment].map(insertProduct).join('\n')

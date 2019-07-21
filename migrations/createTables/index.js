@@ -20,8 +20,8 @@ const Event = `CREATE TABLE IF NOT EXISTS Event (
   HostId INT,
   VenueId INT,
   VenuePrice DECIMAL(9,2),
-  FOREIGN KEY (HostId) REFERENCES Host,
-  FOREIGN KEY (VenueId) REFERENCES Venue
+  FOREIGN KEY (HostId) REFERENCES Host ON DELETE CASCADE,
+  FOREIGN KEY (VenueId) REFERENCES Venue ON DELETE CASCADE
 );`
 
 const Supplier = `CREATE TABLE IF NOT EXISTS Supplier (
@@ -37,7 +37,7 @@ const Product = `CREATE TABLE IF NOT EXISTS Product (
   Description VARCHAR(255),
   Price DECIMAL(9,2),
   SupplierId INT,
-  FOREIGN KEY (SupplierId) REFERENCES Supplier
+  FOREIGN KEY (SupplierId) REFERENCES Supplier ON DELETE CASCADE
 );`
 
 const Order = `CREATE TABLE IF NOT EXISTS Orders (
@@ -46,14 +46,14 @@ const Order = `CREATE TABLE IF NOT EXISTS Orders (
   ProductId INT,
   Quantity INT,
   Cost DECIMAL(9,2),
-  FOREIGN KEY (EventId) REFERENCES Event,
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (EventId) REFERENCES Event ON DELETE CASCADE,
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const Discount = `CREATE TABLE IF NOT EXISTS Discount (
   ProductId SERIAL PRIMARY KEY NOT NULL,
   DiscountValue DECIMAL(4,4),
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const ParadeFloat = `CREATE TABLE IF NOT EXISTS ParadeFloat (
@@ -63,25 +63,25 @@ const ParadeFloat = `CREATE TABLE IF NOT EXISTS ParadeFloat (
   Length INT,
   Weight INT,
   MaxSpeed INT,
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const FoodItem = `CREATE TABLE IF NOT EXISTS FoodItem (
   ProductId INT PRIMARY KEY,
   Cuisine VARCHAR(255),
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const DecorItem = `CREATE TABLE IF NOT EXISTS DecorItem (
   ProductId INT PRIMARY KEY,
   Color VARCHAR(255),
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const Entertainment = `CREATE TABLE IF NOT EXISTS Entertainment (
   ProductId INT PRIMARY KEY,
   AgeRestriction INT,
-  FOREIGN KEY (ProductId) REFERENCES Product
+  FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`
 
 const DietaryRestriction = `CREATE TABLE IF NOT EXISTS DietaryRestriction (
@@ -93,8 +93,8 @@ const DietaryRestrictionAppliesTo = `CREATE TABLE IF NOT EXISTS DietaryRestricti
   ProductId INT,
   RestrictionId INT,
   PRIMARY KEY (ProductId, RestrictionId),
-  FOREIGN KEY (ProductId) REFERENCES FoodItem,
-  FOREIGN KEY (RestrictionId) REFERENCES DietaryRestriction
+  FOREIGN KEY (ProductId) REFERENCES FoodItem ON DELETE CASCADE,
+  FOREIGN KEY (RestrictionId) REFERENCES DietaryRestriction ON DELETE CASCADE
 );`
 
 module.exports = [

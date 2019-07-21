@@ -5,5 +5,5 @@ SELECT
   Email,
   Address
 FROM Supplier
-ORDER BY SupplierId
+ORDER BY Name
 `
