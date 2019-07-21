@@ -32,10 +32,10 @@ const Supplier = `CREATE TABLE IF NOT EXISTS Supplier (
 );`
 
 const Product = `CREATE TABLE IF NOT EXISTS Product (
-  ProductId INT PRIMARY KEY,
+  ProductId SERIAL PRIMARY KEY NOT NULL,
   Name VARCHAR(255),
-  Price DECIMAL(9,2),
   Description VARCHAR(255),
+  Price DECIMAL(9,2),
   SupplierId INT,
   FOREIGN KEY (SupplierId) REFERENCES Supplier
 );`

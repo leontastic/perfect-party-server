@@ -10,8 +10,7 @@ const FoodItem = 'DROP TABLE IF EXISTS FoodItem;'
 const DecorItem = 'DROP TABLE IF EXISTS DecorItem;'
 const Entertainment = 'DROP TABLE IF EXISTS Entertainment;'
 const DietaryRestriction = 'DROP TABLE IF EXISTS DietaryRestriction;'
-const DietaryRestrictionAppliesTo =
-  'DROP TABLE IF EXISTS DietaryRestrictionAppliesTo;'
+const DietaryRestrictionAppliesTo = 'DROP TABLE IF EXISTS DietaryRestrictionAppliesTo;'
 
 module.exports = [
   Order,
