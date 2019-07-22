@@ -45,7 +45,8 @@ const Order = `CREATE TABLE IF NOT EXISTS Orders (
   EventId INT,
   ProductId INT,
   Quantity INT,
-  Cost DECIMAL(9,2),
+  OrderTime TIMESTAMP NOT NULL DEFAULT NOW(),
+  Price DECIMAL(9,2),
   FOREIGN KEY (EventId) REFERENCES Event ON DELETE CASCADE,
   FOREIGN KEY (ProductId) REFERENCES Product ON DELETE CASCADE
 );`

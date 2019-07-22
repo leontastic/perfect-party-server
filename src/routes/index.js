@@ -15,6 +15,8 @@ const insertProduct = require('../db/queries/insertProduct')
 const updateProduct = require('../db/queries/updateProduct')
 const insertEvent = require('../db/queries/insertEvent')
 const updateEvent = require('../db/queries/updateEvent')
+const insertOrders = require('../db/queries/insertOrders')
+const getOrders = require('../db/queries/getOrders')
 
 const router = new Router()
 
@@ -29,7 +31,12 @@ const createBasicRoutes = (
   { create: createQuery, index: indexQuery, update: updateQuery, delete: deleteQuery },
 ) => {
   if (createQuery) {
-    const handleCreate = async ctx => ({ rows: ctx.body } = await db.query(createQuery(ctx.request.body)))
+    const handleCreate = async ctx => {
+      console.log(ctx.request.body)
+      const res = await db.query(createQuery(ctx.request.body))
+      console.log(res)
+      ;({ rows: ctx.body } = res)
+    }
     router.post(`/${entity}`, handleCreate)
   }
   if (indexQuery) {
@@ -72,6 +79,14 @@ createBasicRoutes('products', {
   delete: deleteEntity('Product', 'ProductId'),
 })
 
+router.get('/products', async ctx => {
+  ctx.body = concat(
+    ...(await Promise.all([getFoodItems, getDecorItems, getEntertainment].map(query => db.query(query())))).map(
+      ({ rows }) => rows,
+    ),
+  )
+})
+
 createBasicRoutes('venues', {
   create: insertEntity('Venue', 'VenueId'),
   index: getVenues,
@@ -86,12 +101,11 @@ createBasicRoutes('events', {
   delete: deleteEntity('Event', 'EventId'),
 })
 
-router.get('/products', async ctx => {
-  ctx.body = concat(
-    ...(await Promise.all([getFoodItems, getDecorItems, getEntertainment].map(query => db.query(query())))).map(
-      ({ rows }) => rows,
-    ),
-  )
+createBasicRoutes('orders', {
+  create: insertOrders,
+  index: getOrders,
+  update: updateEntity('Orders', 'OrderId'),
+  delete: deleteEntity('Orders', 'OrderId'),
 })
 
 module.exports = router.routes()
