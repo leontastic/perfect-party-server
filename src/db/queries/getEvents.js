@@ -2,8 +2,9 @@ module.exports = () => `
 SELECT
   Event.EventId,
   Event.EventName,
-  Event.EventDate,
+  TO_CHAR(Event.EventDate, 'YYYY-MM-DD') as EventDate,
   Event.HostId,
+  Event.VenueId,
   Event.VenuePrice,
   Venue.Name as VenueName,
   Venue.Address as VenueAddress,
@@ -11,7 +12,7 @@ SELECT
 FROM Event
 INNER JOIN Venue
 ON Event.VenueId = Venue.VenueId
-LEFT JOIN Host
+INNER JOIN Host
 ON Event.HostId = Host.HostId
 ORDER BY EventDate
 `

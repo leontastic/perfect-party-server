@@ -13,6 +13,8 @@ const getDecorItems = require('../db/queries/getDecorItems')
 const getEntertainment = require('../db/queries/getEntertainment')
 const insertProduct = require('../db/queries/insertProduct')
 const updateProduct = require('../db/queries/updateProduct')
+const insertEvent = require('../db/queries/insertEvent')
+const updateEvent = require('../db/queries/updateEvent')
 
 const router = new Router()
 
@@ -77,8 +79,13 @@ createBasicRoutes('venues', {
   delete: deleteEntity('Venue', 'VenueId'),
 })
 
-router.get('/events', async ctx => ({ rows: ctx.body } = await db.query(getEvents())))
-router.get('/venues', async ctx => ({ rows: ctx.body } = await db.query(getVenues())))
+createBasicRoutes('events', {
+  create: insertEvent,
+  index: getEvents,
+  update: updateEvent,
+  delete: deleteEntity('Event', 'EventId'),
+})
+
 router.get('/products', async ctx => {
   ctx.body = concat(
     ...(await Promise.all([getFoodItems, getDecorItems, getEntertainment].map(query => db.query(query())))).map(
